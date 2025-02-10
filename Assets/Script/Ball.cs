@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
     public float moveSpeed = 1f;
     public float maxStartY = 4f;
     private float Startx = 0f;
+    public GameManager gameManager;
     private void Start()
     {
         InitialPush();
@@ -28,6 +29,7 @@ public class Ball : MonoBehaviour
         ScoreZone scoreZone = collision.GetComponent<ScoreZone>();
         if (scoreZone)
         {
+            gameManager.OnScoreZoneRaached(scoreZone.id);
             ResetBall();
             InitialPush();
         }
