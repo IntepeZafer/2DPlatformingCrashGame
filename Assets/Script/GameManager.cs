@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,9 +7,24 @@ public class GameManager : MonoBehaviour
     public int scorePlayer2;
     public ScoreText scoreTextLeft;
     public ScoreText scoreTextRight;
+    public System.Action onReset;
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     public void OnScoreZoneRaached(int id)
     {
+        onReset?.Invoke();
         if (id == 1)
         {
             scorePlayer1 += 1;

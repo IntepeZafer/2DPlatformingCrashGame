@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
     public float moveSpeed = 1f;
     public float maxStartY = 4f;
     private float Startx = 0f;
+    public float speedMultiplier = 1.1f;
     public GameManager gameManager;
     private void Start()
     {
@@ -33,5 +34,10 @@ public class Ball : MonoBehaviour
             ResetBall();
             InitialPush();
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Paddle paddle = collision.collider.GetComponent<Paddle>();
+        rb2d.velocity *= speedMultiplier;
     }
 }
